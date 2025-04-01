@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "graphiti": {
+      "transport": "sse",
+      "url": "http://localhost:8000/sse",
+      "disabled": true,
+      "alwaysAllow": []
+    }
+  }
+}
