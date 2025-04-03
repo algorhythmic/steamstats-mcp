@@ -143,3 +143,39 @@ Refer to `STEAMSTATS_MCP_SPECIFICATION.md` for detailed information on available
 *   `getSupportedApiList`
 *   `getAppList`
 *   `getGlobalAchievementPercentages`
+
+## Connecting a Local MCP Client (e.g., Roo)
+
+To connect a local MCP client, such as the Roo VS Code extension, to this running server, you need to configure the client's `mcp.json` file. This file typically resides in a `.roo` directory within your project or user settings.
+
+The configuration tells the client how to communicate with the server. Since this is an HTTP-based server (FastAPI/Uvicorn), you'll use the `sse` (Server-Sent Events) type.
+
+1.  **Ensure the SteamStats MCP Server is running:** Follow the "Running the Server" instructions above. By default, it runs on `http://localhost:8000`.
+2.  **Locate or create your `mcp.json` file:** This might be in `.roo/mcp.json` in your workspace or a global configuration location.
+3.  **Add the server configuration:** Add an entry to the `servers` array in `mcp.json`.
+
+**Example `mcp.json` entry:**
+
+```json
+{
+  "servers": [
+    // ... other server configurations ...
+    {
+      "name": "steamstats-local", // Choose a descriptive name
+      "type": "sse",
+      "enabled": true,
+      "url": "http://localhost:8000/message", // Adjust host/port if you changed defaults
+      "readTimeoutSeconds": 60,
+      "writeTimeoutSeconds": 60
+    }
+  ]
+}
+```
+
+*   **`name`**: A unique identifier for this server connection.
+*   **`type`**: Must be `sse` for HTTP-based servers.
+*   **`enabled`**: Set to `true` to activate the connection.
+*   **`url`**: The full URL to the `/message` endpoint of the running server. Make sure the host and port match how you are running the server (e.g., if you used `export PORT=8081`, change the URL accordingly).
+*   **`readTimeoutSeconds` / `writeTimeoutSeconds`**: Optional timeouts.
+
+Once configured and the server is running, your MCP client should be able to connect and utilize the tools provided by this SteamStats server.
