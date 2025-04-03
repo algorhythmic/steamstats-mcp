@@ -1,10 +1,42 @@
 {
-  "mcpServers": {
-    "graphiti": {
+  "servers": [
+    {
+      "name": "steamstats-local",
       "transport": "sse",
-      "url": "http://localhost:8000/sse",
-      "disabled": true,
+      "enabled": true,
+      "url": "http://localhost:8000/message",
+      "readTimeoutSeconds": 60,
+      "writeTimeoutSeconds": 60,
+      "disabled": false,
+      "alwaysAllow": []
+    },
+    {
+      "name": "github-local",
+      "transport": "stdio",
+      "enabled": true,
+      "command": "/opt/homebrew/bin/node",
+      "arguments": [
+        "dist/index.js"
+      ],
+      "cwd": "/Users/daviddunn/Documents/Code/servers/src/github",
+      "readTimeoutSeconds": 60,
+      "writeTimeoutSeconds": 60,
+      "disabled": false,
+      "alwaysAllow": []
+    },
+    {
+      "name": "test-echo-server",
+      "transport": "stdio",
+      "enabled": true,
+      "command": "/Users/daviddunn/Documents/Code/steamstats-mcp/.venv/bin/python",
+      "arguments": [
+        "test_server.py"
+      ],
+      "cwd": "/Users/daviddunn/Documents/Code/mcp-test-server",
+      "readTimeoutSeconds": 60,
+      "writeTimeoutSeconds": 60,
+      "disabled": false,
       "alwaysAllow": []
     }
-  }
+  ]
 }
