@@ -1,5 +1,9 @@
 # SteamStats MCP Server
 
+## Warning
+
+Current implementation is not operational!
+
 ## Overview
 
 This project implements a SteamStats MCP (Model Context Protocol) Server using Python and FastAPI. The server acts as an intermediary between an MCP client (like Roo) and the Steam Web API, providing structured access to various Steam game statistics and user information.
